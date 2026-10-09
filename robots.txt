@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /php/
+Sitemap: https://adverta.co/sitemap.xml
