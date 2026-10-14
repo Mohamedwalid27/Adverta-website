@@ -4,3 +4,142 @@
 @media(max-width:980px){.nav-links{gap:14px}.hero-grid{grid-template-columns:1fr .65fr;gap:24px}.brand-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.stat-card:nth-child(4){border-inline-start:0}.results-grid,.cards-grid,.three-col{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}}
 @media(max-width:760px){.container{width:min(var(--max),calc(100% - 30px))}.section{padding-block:60px}.nav{min-height:70px}.brand img{width:160px}.menu-toggle{display:block}.nav-links{display:none;position:absolute;top:69px;inset-inline:0;background:#fff;border-bottom:1px solid var(--line);padding:18px 22px 24px;flex-direction:column;align-items:stretch;gap:0;box-shadow:0 15px 25px rgba(18,30,70,.08)}.nav-links.is-open{display:flex}.nav-links a{padding:12px 0;border-bottom:1px solid #f0f2f7}.nav-cta{display:none}.hero{padding:58px 0 48px}.hero-grid{grid-template-columns:1fr}.hero-art{min-height:230px;order:2}.orb{width:220px}.hero-note{bottom:0;left:4%}.brand-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.desktop-logos{display:none}.mobile-logos{display:block}.results-grid,.cards-grid,.three-col,.two-col,.process-list{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.stat-card:nth-child(odd){border-inline-start:0}.stat-card{padding-inline:10px}.cta-panel{align-items:flex-start;flex-direction:column}.form-layout{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field--full{grid-column:auto}.case-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-grid{grid-template-columns:1fr}.footer-grid>div:first-child{grid-column:auto}.footer-bottom{flex-direction:column}.whatsapp-float{bottom:14px;inset-inline-end:14px;padding:12px 15px}.page-hero{padding:56px 0 38px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+
+/* Universal button glow + light-sweep hover effect */
+:where(button, .btn, .whatsapp-float, input[type="submit"], input[type="button"], input[type="reset"], a[role="button"]) {
+  --button-glow: 38, 121, 243;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform .28s ease, box-shadow .35s ease, border-color .3s ease,
+              background-color .3s ease, color .3s ease, filter .35s ease;
+}
+
+:where(button, .btn, .whatsapp-float, input[type="submit"], input[type="button"], input[type="reset"], a[role="button"])::after {
+  content: "";
+  position: absolute;
+  top: -35%;
+  bottom: -35%;
+  left: -45%;
+  width: 34%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4), transparent);
+  transform: translateX(-250%) skewX(-18deg);
+  transition: transform .72s cubic-bezier(.2, .65, .3, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn:hover,
+button:not(:disabled):hover,
+.whatsapp-float:hover,
+input[type="submit"]:not(:disabled):hover,
+input[type="button"]:not(:disabled):hover,
+input[type="reset"]:not(:disabled):hover,
+a[role="button"]:hover {
+  box-shadow: 0 0 0 1px rgba(var(--button-glow), .3),
+              0 0 15px rgba(var(--button-glow), .42),
+              0 0 32px rgba(var(--button-glow), .22);
+  filter: brightness(1.04);
+}
+
+.btn:hover::after,
+button:not(:disabled):hover::after,
+.whatsapp-float:hover::after,
+input[type="submit"]:not(:disabled):hover::after,
+input[type="button"]:not(:disabled):hover::after,
+input[type="reset"]:not(:disabled):hover::after,
+a[role="button"]:hover::after {
+  transform: translateX(600%) skewX(-18deg);
+}
+
+.whatsapp-float {
+  --button-glow: 29, 187, 104;
+}
+.whatsapp-float:hover {
+  box-shadow: 0 0 0 1px rgba(29, 187, 104, .3),
+              0 0 15px rgba(29, 187, 104, .42),
+              0 0 32px rgba(29, 187, 104, .24);
+}
+
+.btn:focus-visible,
+button:focus-visible,
+.whatsapp-float:focus-visible,
+input[type="submit"]:focus-visible,
+input[type="button"]:focus-visible,
+input[type="reset"]:focus-visible,
+a[role="button"]:focus-visible {
+  box-shadow: 0 0 0 3px rgba(38, 121, 243, .2), 0 0 20px rgba(38, 121, 243, .3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(button, .btn, .whatsapp-float, input[type="submit"], input[type="button"], input[type="reset"], a[role="button"]),
+  :where(button, .btn, .whatsapp-float, input[type="submit"], input[type="button"], input[type="reset"], a[role="button"])::after {
+    transition: none !important;
+  }
+}
+
+/* Header navigation glow + light-sweep hover transition */
+.nav-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border-radius: 999px;
+  isolation: isolate;
+  overflow: hidden;
+  transition: color .28s ease, background-color .28s ease,
+              box-shadow .32s ease, transform .28s ease;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  top: -35%;
+  bottom: -35%;
+  left: -45%;
+  width: 34%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .85), transparent);
+  transform: translateX(-250%) skewX(-18deg);
+  transition: transform .68s cubic-bezier(.2, .65, .3, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.nav-links a:hover {
+  color: var(--blue);
+  background-color: rgba(38, 121, 243, .075);
+  box-shadow: 0 0 0 1px rgba(38, 121, 243, .16),
+              0 0 13px rgba(38, 121, 243, .18),
+              0 0 24px rgba(38, 121, 243, .10);
+  transform: translateY(-1px);
+}
+
+.nav-links a:hover::after {
+  transform: translateX(600%) skewX(-18deg);
+}
+
+.nav-links a:focus-visible {
+  outline: 2px solid rgba(38, 121, 243, .65);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(38, 121, 243, .12),
+              0 0 18px rgba(38, 121, 243, .2);
+}
+
+@media (max-width: 760px) {
+  .nav-links a {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-links a,
+  .nav-links a::after {
+    transition: none !important;
+  }
+}
